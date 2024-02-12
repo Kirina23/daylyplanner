@@ -3,11 +3,15 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-
 class CustomUserManager(BaseUserManager):
-    def create_user(self, phone, password, **extra_fields):
+    def create_user(self, phone, password=None, **extra_fields):
         if not phone:
             raise ValueError(_('The Phone number must be set'))
+        
+        # Удалите или игнорируйте флаги is_staff и is_superuser
+        extra_fields.pop('is_staff', None)
+        extra_fields.pop('is_superuser', None)
+
         user = self.model(phone=phone, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -23,7 +27,6 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_superuser=True.'))
 
         return self.create_user(phone, password, **extra_fields)
-
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=15, unique=True)
