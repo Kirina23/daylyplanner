@@ -14,7 +14,7 @@ export const registerUser = async (userData: UserData): Promise<AuthResponse | v
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    const data: AuthResponse = await response.json(); // Предполагаем, что ответ содержит данные авторизации
+    const data: AuthResponse = await response.json(); // ответ содержит данные авторизации
     return data;
   } catch (error) {
     if (error instanceof Error) {
