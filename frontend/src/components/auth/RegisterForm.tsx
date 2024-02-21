@@ -1,46 +1,47 @@
 import React, { useState } from 'react';
-import { loginUser } from '../../api/apiService'; // Импортируйте функцию входа
+import { registerUser } from '../../api/apiService'; // Убедитесь, что путь к файлу верный
 
-const LoginForm: React.FC = () => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+interface RegisterFormData {
+  phone: string;
+  password: string;
+}
+
+const RegisterForm: React.FC = () => {
+  const [formData, setFormData] = useState<RegisterFormData>({ phone: '', password: '' });
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     try {
-      const response = await loginUser({ phone, password });
-      // Добавляем проверку на undefined
+      const response = await registerUser(formData);
       if (response && response.token) {
-        localStorage.setItem('token', response.token);
-        // Перенаправление на главную страницу или дашборд
+        console.log('Регистрация прошла успешно:', response);
+        // Действия после успешной регистрации, например, переход на страницу входа
       } else {
-        // Обработка случая, когда response undefined или не содержит token
-        console.error("Ошибка входа: отсутствует токен в ответе");
+        // Обработка случая, когда ответ от сервера не содержит токен
+        console.error("Ошибка регистрации: нет токена в ответе");
       }
     } catch (error) {
-      console.error("Ошибка входа", error);
-      // Отобразить сообщение об ошибке
+      console.error("Ошибка регистрации", error);
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        placeholder="Номер телефона"
+        value={formData.phone}
+        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+        placeholder="Телефон"
       />
       <input
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={formData.password}
+        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         placeholder="Пароль"
       />
-      <button type="submit">Войти</button>
+      <button type="submit">Зарегистрироваться</button>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

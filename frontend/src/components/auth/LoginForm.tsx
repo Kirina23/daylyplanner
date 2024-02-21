@@ -11,9 +11,9 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Телефон" />
+      <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" />
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Пароль" />
-      <button type="submit">Войти</button>
+      <button type="submit">Ok</button>
     </form>
   );
 };

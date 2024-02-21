@@ -1,25 +1,18 @@
 import React from 'react';
-import { View, Button, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../types/NavigationTypes';
-import { StackNavigationProp } from '@react-navigation/stack';
+import RegisterForm from '../components/auth/RegisterForm'; 
 
-// Типизация для пропсов компонента
-type RegisterScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Register'>;
-
-type Props = {
-  navigation: RegisterScreenNavigationProp;
-};
-
-const RegisterScreen: React.FC<Props> = () => {
-  const navigation = useNavigation<RegisterScreenNavigationProp>(); // Использование хука с типизацией
+const RegisterScreen: React.FC = () => {
+  const navigation = useNavigation(); // Использование хука без дополнительной типизации, если не требуется
 
   return (
     <View>
       <Text>This is the Register Screen</Text>
-      <Button title="Go to Login" onPress={() => navigation.navigate('Login')} />
+      <RegisterForm /> {/* Использование формы регистрации */}
     </View>
   );
 };
 
 export default RegisterScreen;
+
