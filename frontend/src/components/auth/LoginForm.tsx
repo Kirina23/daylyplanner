@@ -1,19 +1,35 @@
 import React, { useState } from 'react';
+import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { styles } from '../../styles/LoginFormStyles'; // Убедитесь, что путь до файла стилей указан верно
 
-export const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Здесь вызовите функцию из authService для отправки данных
+  const handleSubmit = () => {
+    // Обработка данных формы
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Пароль" />
-      <button type="submit">Ok</button>
-    </form>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={phone}
+        onChangeText={setPhone}
+        placeholder="Номер телефона"
+      />
+      <TextInput
+        style={styles.input}
+        value={password}
+        onChangeText={setPassword}
+        placeholder="Пароль"
+        secureTextEntry
+      />
+      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+        <Text style={styles.buttonText}>Войти</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
+
+export default LoginForm;

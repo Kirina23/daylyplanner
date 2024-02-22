@@ -1,46 +1,39 @@
 import React, { useState } from 'react';
-import { registerUser } from '../../api/apiService'; // Убедитесь, что путь к файлу верный
+import { registerUser } from '../../api/apiService'; 
+import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import styles from '../../styles/RegisterScreenStyles';
 
-interface RegisterFormData {
-  phone: string;
-  password: string;
-}
+const RegisterForm = () => {
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
 
-const RegisterForm: React.FC = () => {
-  const [formData, setFormData] = useState<RegisterFormData>({ phone: '', password: '' });
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      const response = await registerUser(formData);
-      if (response && response.token) {
-        console.log('Регистрация прошла успешно:', response);
-        // Действия после успешной регистрации, например, переход на страницу входа
-      } else {
-        // Обработка случая, когда ответ от сервера не содержит токен
-        console.error("Ошибка регистрации: нет токена в ответе");
-      }
-    } catch (error) {
-      console.error("Ошибка регистрации", error);
-    }
+  // Обработка отправки формы
+  const handleRegister = () => {
+    // Здесь будет логика регистрации
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={formData.phone}
-        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+    <View style={styles.formContainer}>
+      <TextInput 
+        style={styles.input}
         placeholder="Телефон"
+        value={phone}
+        onChangeText={setPhone}
+        keyboardType="phone-pad" // Для ввода номера телефона
       />
-      <input
-        type="password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+      <TextInput
+        style={styles.input}
         placeholder="Пароль"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry // Скрытие вводимого пароля
       />
-      <button type="submit">Зарегистрироваться</button>
-    </form>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleRegister} style={styles.button}>
+          <Text style={styles.buttonText}>Зарегистрироваться</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
