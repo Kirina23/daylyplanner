@@ -3,7 +3,6 @@ from rest_framework import status, views
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from rest_framework.views import APIView
-from .serializers import UserSerializer
 from django.http import HttpResponse
 
 def home(request):
