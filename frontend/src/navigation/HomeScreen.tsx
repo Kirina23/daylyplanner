@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
-import { View, Text, Animated, TouchableOpacity } from 'react-native';
+import { View, Text, Animated} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/NavigationTypes';
 import styles from '../styles/HomeScreenStyles';
+import { Pressable } from 'react-native';
 
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -31,24 +32,24 @@ const HomeScreen = () => {
       <Text style={styles.title}>Welcome to DaylyPlanner</Text>
       <View style={styles.buttonContainer}>
         <Animated.View style={{ transform: [{ scale: scaleRegister }] }}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate('Register')}
             onPressIn={() => animateScale(scaleRegister, 0.95)}
             onPressOut={() => animateScale(scaleRegister, 1)}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Register</Text>
-          </TouchableOpacity>
+          </Pressable>
         </Animated.View>
         <Animated.View style={{ transform: [{ scale: scaleLogin }] }}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate('Login')}
             onPressIn={() => animateScale(scaleLogin, 0.95)}
             onPressOut={() => animateScale(scaleLogin, 1)}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
+          </Pressable>
         </Animated.View>
       </View>
     </View>

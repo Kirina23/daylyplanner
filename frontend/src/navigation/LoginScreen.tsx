@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import {LoginForm} from '../components/auth/LoginForm';
+import LoginForm from '../components/auth/LoginForm';
 import styles from '../styles/LoginScreenStyles'; // Убедитесь, что путь к файлу стилей верный
 
 const LoginScreen: React.FC = () => {

@@ -24,7 +24,7 @@ export default StyleSheet.create({
     margin: 10,
     ...Platform.select({
       ios: {
-        shadowOpacity: 0.3,
+        boxShadow: 0.3,
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 2 },
         shadowColor: '#000',

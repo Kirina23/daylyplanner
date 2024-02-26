@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
-import { styles } from '../../styles/LoginFormStyles'; // Убедитесь, что путь до файла стилей указан верно
+import { View, TextInput, Text} from 'react-native';
+import { styles } from '../../styles/LoginFormStyles'; 
+import { Pressable } from 'react-native';
+
 
 const LoginForm: React.FC = () => {
   const [phone, setPhone] = useState('');
@@ -25,9 +27,9 @@ const LoginForm: React.FC = () => {
         placeholder="Пароль"
         secureTextEntry
       />
-      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+      <Pressable onPress={handleSubmit} style={styles.button}>
         <Text style={styles.buttonText}>Войти</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

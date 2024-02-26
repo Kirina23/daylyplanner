@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  buttonPressed: { // Добавляем этот стиль
+    backgroundColor: '#0056b3',
+  },
 });
 
 export default styles;
