@@ -1,32 +1,12 @@
 {
-  "name": "daylyplanner",
-  "version": "1.0.0",
-  "description": "planner",
-  "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "start-frontend": "cd frontend && npm start -- --web",
     "start-backend": "cd backend && python manage.py runserver",
-    "start-frontend": "cd frontend && npm start",
-    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\""
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kirina23/daylyplanner.git"
-  },
-  "keywords": [
-    "\"planner\"",
-    "\"task\"",
-    "\"todo\"",
-    "\"schedule\"",
-    "\"organizer\""
-  ],
-  "author": "Irina Kirichenko",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/Kirina23/daylyplanner/issues"
-  },
-  "homepage": "https://github.com/Kirina23/daylyplanner#readme",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
+  "dependencies": {
+    "@expo/ngrok": "^4.1.0",
+    "@expo/webpack-config": "^18.0.1",
+    "concurrently": "^7.5.0"
   }
 }

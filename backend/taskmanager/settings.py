@@ -1,19 +1,14 @@
 import os
 from pathlib import Path
 
-# Определение базового каталога проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Секретный ключ для проекта
 SECRET_KEY = 'django-insecure-221lp135s3)fdk1qe(rc!ls=u303%)lm&s@p@8f0hzhv0x3_8g'
 
-# Включение режима отладки
 DEBUG = True
 
-# Список хостов/доменов, которым разрешено обслуживание данного проекта
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Установленные приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,7 +21,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# Промежуточное программное обеспечение
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -38,10 +32,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-# Конфигурация URL
 ROOT_URLCONF = 'taskmanager.urls'
 
-# Настройки шаблонов
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -58,10 +50,8 @@ TEMPLATES = [
     },
 ]
 
-# Приложение WSGI
 WSGI_APPLICATION = 'taskmanager.wsgi.application'
 
-# Конфигурация базы данных
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -73,7 +63,6 @@ DATABASES = {
     }
 }
 
-# Валидаторы паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -89,31 +78,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Локализация
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Статические файлы
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-# Модель пользователей
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-# Фреймворк REST
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
-# Настройки CORS
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8081",
 ]
 
-# Добавляем конфигурацию логирования
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -127,7 +110,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'django.log'),  # Путь к файлу логов
+            'filename': os.path.join(BASE_DIR, 'django.log'),
             'formatter': 'verbose',
         },
     },
