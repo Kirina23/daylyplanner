@@ -95,6 +95,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8081",
+    "http://localhost:19006",
 ]
 
 LOGGING = {
