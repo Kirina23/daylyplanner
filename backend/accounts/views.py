@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import permission_required
+from accounts.models import CustomUser
 
 
 def home(request):
@@ -23,12 +25,13 @@ class UserCreateView(views.APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Удаление пользователя из админки
+@permission_required('accounts.delete_customuser')
 def delete_user(request, user_id):
-    # Проверяем, имеет ли текущий пользователь права на удаление других пользователей
-    if request.user.has_perm('auth.delete_user'):
-        # Находим пользователя в базе данных или возвращаем 404 ошибку, если пользователь не найден
-        user = get_object_or_404(User, id=user_id)
-        # Удаляем пользователя
+    # Находим пользователя в базе данных или возвращаем 404 ошибку, если пользователь не найден
+    user = get_object_or_404(CustomUser, id=user_id)
+    
+    # Удаляем пользователя, если он не является суперпользователем
+    if not user.is_superuser:
         user.delete()
         # Перенаправляем пользователя на страницу с пользователями или куда-то еще
         return redirect('users_list')

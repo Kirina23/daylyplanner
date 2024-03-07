@@ -1,0 +1,21 @@
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <style>
+        /* Здесь могут быть ваши дополнительные стили */
+        .custom-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .custom-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}

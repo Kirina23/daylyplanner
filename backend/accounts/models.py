@@ -40,6 +40,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = []
 
+    def get_short_name(self):
+        # Возможная реализация: возвращаем телефон или логин, если он существует
+        return self.login if self.login else self.phone
+
+    def get_full_name(self):
+        # Возможная реализация: возвращаем телефон, так как у нас нет отдельных полей для имени пользователя
+        return self.phone
+
+    def __str__(self):
+        # Возвращаем удобное для чтения представление объекта, например, телефон
+        return self.phone
+
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')

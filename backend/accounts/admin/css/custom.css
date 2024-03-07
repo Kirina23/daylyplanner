@@ -1,0 +1,12 @@
+.button {
+    background-color: #dc3545; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста кнопки */
+    border: none; /* Убрать границу кнопки */
+    padding: 10px 20px; /* Внутренние отступы кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    cursor: pointer; /* Изменение курсора при наведении */
+}
+
+.button:hover {
+    background-color: #c82333; /* Цвет фона кнопки при наведении */
+}
