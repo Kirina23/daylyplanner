@@ -6,7 +6,6 @@ import { RootStackParamList } from '../types/NavigationTypes';
 import styles from '../styles/HomeScreenStyles';
 import { Pressable } from 'react-native';
 
-
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen = () => {
@@ -19,15 +18,13 @@ const HomeScreen = () => {
   const animateScale = (scale: Animated.Value, newValue: number) => {
     Animated.spring(scale, {
       toValue: newValue,
-      friction: 3,
-      speed: 0.1, // Меньше значение = медленнее анимация
-      bounciness: 4, // Меньше значение = меньше "отскока"
-      useNativeDriver: true,
+      friction: 3, // Управляет "скоростью" анимации
+      tension: 40, // Управляет "силой" анимации
+      useNativeDriver: true, // Может потребоваться изменить на false, если встретится проблема с поддержкой
     }).start();
   };
-
   
-  return (
+    return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to DaylyPlanner</Text>
       <View style={styles.buttonContainer}>
