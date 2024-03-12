@@ -3,7 +3,6 @@ import { View, TextInput, Text} from 'react-native';
 import { styles } from '../../styles/LoginFormStyles'; 
 import { Pressable } from 'react-native';
 
-
 const LoginForm: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');

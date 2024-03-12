@@ -3,13 +3,14 @@ import { View, TextInput, Text, Pressable, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { registerUser } from '../../api/apiService';
 import styles from '../../styles/RegisterScreenStyles';
+import mainStyles from '../../styles/MainScreenStyles';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 // Определите типы для вашего стека навигации
 type RootStackParamList = {
   HomeScreen: undefined;
   RegisterScreen: undefined;
-  // Определите другие маршруты здесь
+  MainScreen: undefined;
 };
 
 // Определите типы для параметров функции навигации
@@ -18,56 +19,47 @@ type RegisterScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Reg
 const RegisterForm: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation<RegisterScreenNavigationProp>();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>(); // Добавляем использование useNavigation здесь
 
-  // Обработка отправки формы
-  const handleRegister = async () => {
+  const handleRegisterPress = async () => {
     try {
+      // Предположим, что registerUser - это ваша функция для регистрации пользователя
       const response = await registerUser({ phone, password });
       if (response && response.token) {
-        // Успешная регистрация
-        Alert.alert("Регистрация прошла успешно", "Токен: " + response.token);
-        // Перенаправление на HomeScreen
-        console.log("Переход на HomeScreen");
-        navigation.navigate('HomeScreen');
+        Alert.alert("Success", "You have been registered successfully.");
+        console.log("Trying to navigate to MainScreen");
+        navigation.navigate('MainScreen'); // Переход на главный экран после успешной регистрации
       } else {
-        // Обработка случая, когда ответ от сервера не содержит токен
-        Alert.alert("Ошибка регистрации", "Ответ от сервера не содержит токен");
+        Alert.alert("Registration Error", "Something went wrong with your registration.");
       }
     } catch (error) {
-      if (error instanceof Error) {
-        // Ошибка с известным форматом
-        Alert.alert("Ошибка регистрации", error.message);
-      } else {
-        // Неизвестная ошибка
-        Alert.alert("Ошибка регистрации", "Произошла неизвестная ошибка");
-      }
+      Alert.alert("Registration Error", "An unexpected error occurred.");
     }
   };
 
   return (
-    <View style={styles.formContainer}>
+    <View style={mainStyles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Телефон"
+        placeholder="Phone number"
         value={phone}
         onChangeText={setPhone}
         keyboardType="phone-pad"
       />
       <TextInput
         style={styles.input}
-        placeholder="Пароль"
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <View style={styles.buttonContainer}>
-        <Pressable onPress={handleRegister} style={styles.button}>
-          <Text style={styles.buttonText}>Зарегистрироваться</Text>
-        </Pressable>
-      </View>
+      <Pressable onPress={handleRegisterPress} style={styles.button}>
+        <Text style={styles.buttonText}>Register</Text> {/* Кнопка "Зарегистрироваться" на английском */}
+      </Pressable>
     </View>
   );
 };
+
+// Стили и дополнительные компоненты (если требуются)
 
 export default RegisterForm;

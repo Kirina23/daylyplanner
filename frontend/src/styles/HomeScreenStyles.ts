@@ -24,7 +24,7 @@ export default StyleSheet.create({
     margin: 10,
     ...Platform.select({
       ios: {
-        boxShadow: 0.3,
+        shadowOpacity: 0.3, // Добавлено для прозрачности тени
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 2 },
         shadowColor: '#000',
@@ -33,6 +33,7 @@ export default StyleSheet.create({
         elevation: 3,
       },
       web: {
+        // boxShadow уже был правильно установлен для веба
         boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.3)',
       }
     }),
