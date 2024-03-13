@@ -25,7 +25,9 @@ const RegisterForm: React.FC = () => {
     try {
       // Предположим, что registerUser - это ваша функция для регистрации пользователя
       const response = await registerUser({ phone, password });
-      if (response && response.token) {
+
+      console.log("Response from server:", JSON.stringify(response, null, 2));
+        if (response && response.token) {
         Alert.alert("Success", "You have been registered successfully.");
         console.log("Trying to navigate to MainScreen");
         navigation.navigate('MainScreen'); // Переход на главный экран после успешной регистрации

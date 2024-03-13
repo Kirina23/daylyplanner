@@ -9,11 +9,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import permission_required
 from accounts.models import CustomUser
-
+from rest_framework.authtoken.models import Token
 
 def home(request):
     return HttpResponse("Welcome to Daylyplanner!")
-
 
 class UserCreateView(views.APIView):
     def post(self, request):
@@ -21,7 +20,9 @@ class UserCreateView(views.APIView):
         if serializer.is_valid():
             user = serializer.save()
             if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                token, created = Token.objects.get_or_create(user=user)
+                # Возвращаем данные пользователя и токен
+                return Response({"user": serializer.data, "token": token.key}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Удаление пользователя из админки

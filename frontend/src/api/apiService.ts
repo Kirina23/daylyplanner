@@ -1,6 +1,6 @@
 interface AuthResponse {
     token: string;
-    // Дополнительные поля, которые может возвращать ваш API
+    // Дополнительные поля, которые может возвращать API
   }
   
   interface UserData {
@@ -17,16 +17,23 @@ interface AuthResponse {
         body: JSON.stringify(userData),
       });
   
+      // Логируем статус ответа для диагностики
+      console.log('Register response status:', response.status);
+  
       if (!response.ok) {
+        const errorData = await response.text(); // Получаем текст ошибки для лучшего понимания
+        console.error('Register error response:', errorData); // Логируем текст ошибки
         throw new Error('Network response was not ok');
       }
   
       const data: AuthResponse = await response.json();
+      console.log('Registration successful:', data); // Логирование успешного ответа
       return data;
     } catch (error) {
       console.error('Error during user registration:', error);
     }
   };
+  
   
   export const loginUser = async (userData: UserData): Promise<AuthResponse | undefined> => {
     try {
@@ -36,11 +43,17 @@ interface AuthResponse {
         body: JSON.stringify(userData),
       });
   
+      // Логируем статус ответа для диагностики
+      console.log('Login response status:', response.status);
+  
       if (!response.ok) {
+        const errorData = await response.text(); // Получаем текст ошибки для лучшего понимания
+        console.error('Login error response:', errorData); // Логируем текст ошибки
         throw new Error('Network response was not ok');
       }
   
       const data: AuthResponse = await response.json();
+      console.log('Login successful:', data); // Логирование успешного ответа
       return data;
     } catch (error) {
       console.error('Error during user login:', error);
