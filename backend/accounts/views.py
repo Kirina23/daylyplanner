@@ -18,12 +18,20 @@ class UserCreateView(views.APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
+            # Проверяем, существует ли уже пользователь с таким номером телефона
+            phone = serializer.validated_data.get('phone')
+            if CustomUser.objects.filter(phone=phone).exists():
+                # Если пользователь с таким номером телефона уже существует, возвращаем ошибку
+                return Response({"error": "A user with this phone number already exists."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Создаем пользователя, если с таким номером телефона еще нет аккаунта
             user = serializer.save()
-            if user:
-                token, created = Token.objects.get_or_create(user=user)
-                # Возвращаем данные пользователя и токен
-                return Response({"user": serializer.data, "token": token.key}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            token, created = Token.objects.get_or_create(user=user)
+            # Возвращаем данные пользователя и токен
+            return Response({"user": serializer.data, "token": token.key}, status=status.HTTP_201_CREATED)
+        else:
+            # Если данные в сериализаторе не валидны, возвращаем ошибки валидации
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Удаление пользователя из админки
 @permission_required('accounts.delete_customuser')

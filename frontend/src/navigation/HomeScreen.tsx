@@ -3,7 +3,7 @@ import { View, Text, Animated} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/NavigationTypes';
-import styles from '../styles/HomeScreenStyles';
+import homeStyles from '../styles/HomeScreenStyles';
 import { Pressable } from 'react-native';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -25,17 +25,17 @@ const HomeScreen = () => {
   };
   
     return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to DaylyPlanner</Text>
-      <View style={styles.buttonContainer}>
+    <View style={homeStyles.container}>
+      <Text style={homeStyles.title}>Welcome to DaylyPlanner</Text>
+      <View style={homeStyles.buttonContainer}>
         <Animated.View style={{ transform: [{ scale: scaleRegister }] }}>
           <Pressable
             onPress={() => navigation.navigate('Register')}
             onPressIn={() => animateScale(scaleRegister, 0.95)}
             onPressOut={() => animateScale(scaleRegister, 1)}
-            style={styles.button}
+            style={homeStyles.button}
           >
-            <Text style={styles.buttonText}>Register</Text>
+            <Text style={homeStyles.buttonText}>Register</Text>
           </Pressable>
         </Animated.View>
         <Animated.View style={{ transform: [{ scale: scaleLogin }] }}>
@@ -43,9 +43,9 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('Login')}
             onPressIn={() => animateScale(scaleLogin, 0.95)}
             onPressOut={() => animateScale(scaleLogin, 1)}
-            style={styles.button}
+            style={homeStyles.button}
           >
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={homeStyles.buttonText}>Login</Text>
           </Pressable>
         </Animated.View>
       </View>

@@ -3,5 +3,8 @@
     "start-frontend": "cd frontend && npx expo start --web",
     "start-backend": "cd backend && python manage.py runserver",
     "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\""
+  },
+  "dependencies": {
+    "expo": "~50.0.13"
   }
- }
+}
